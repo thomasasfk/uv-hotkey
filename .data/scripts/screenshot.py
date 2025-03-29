@@ -6,7 +6,6 @@
 #   "Pillow>=9.0.0",
 # ]
 # ///
-
 import sys
 import os
 import json
@@ -17,9 +16,9 @@ from PyQt5.QtWidgets import (
     QHBoxLayout, QFileDialog, QGridLayout, QDialog, QScrollArea,
     QSizePolicy
 )
-from PyQt5.QtGui import QPainter, QColor, QPen, QPixmap, QCursor, QImage, QIcon
-from PyQt5.QtCore import Qt, QPoint, QRect, QSize, pyqtSignal
-from PIL import ImageGrab, Image
+from PyQt5.QtGui import QPainter, QColor, QPen, QPixmap, QImage
+from PyQt5.QtCore import Qt, QPoint, QRect, QSize
+from PIL import ImageGrab
 
 
 class DestinationSelector(QDialog):
@@ -84,7 +83,6 @@ class DestinationSelector(QDialog):
             json.dump(self.destinations, f)
 
     def add_destination_buttons(self):
-        # Clear all existing buttons
         while self.grid_layout.count():
             item = self.grid_layout.takeAt(0)
             if item.widget():
@@ -109,7 +107,6 @@ class DestinationSelector(QDialog):
                 col = 0
                 row += 1
 
-        # Update the layout
         self.grid_layout.update()
         QApplication.processEvents()
 
@@ -119,7 +116,6 @@ class DestinationSelector(QDialog):
             self.destinations.append(folder)
             self.save_destinations()
             self.add_destination_buttons()
-            # Force UI update after adding new destination
             self.adjustSize()
             self.repaint()
             QApplication.processEvents()
@@ -137,7 +133,7 @@ class DestinationSelector(QDialog):
 
         btn_layout = QVBoxLayout()
         for dest in self.destinations:
-            if dest != str(self.default_dir):  # Don't allow removing default
+            if dest != str(self.default_dir):
                 btn = QPushButton(dest)
                 btn.clicked.connect(lambda checked, d=dest: self.confirm_remove(d, remove_dialog))
                 btn_layout.addWidget(btn)
@@ -155,7 +151,6 @@ class DestinationSelector(QDialog):
         self.save_destinations()
         self.add_destination_buttons()
         dialog.accept()
-        # Force layout update after removing destination
         self.repaint()
         QApplication.processEvents()
 
@@ -392,18 +387,14 @@ class ScreenshotOverlay(QWidget):
 
 def main():
     app = QApplication(sys.argv)
-
     app.setAttribute(Qt.AA_UseHighDpiPixmaps, True)
     app.setAttribute(Qt.AA_EnableHighDpiScaling, True)
-
     app.setDesktopSettingsAware(False)
 
     screenshot_tool = ScreenshotOverlay()
-
     QApplication.processEvents()
 
     screenshot_tool.show()
-
     QApplication.processEvents()
 
     return app.exec_()

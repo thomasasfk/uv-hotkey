@@ -20,11 +20,10 @@ import openai
 import tempfile
 import keyboard
 from pathlib import Path
-from pydub import AudioSegment
 
-# Use a lock file instead of a state file for better performance
-LOCK_FILE = Path(tempfile.gettempdir()) / "mic_recording.lock"
-OUTPUT_FILE = Path(tempfile.gettempdir()) / "recording.wav"
+SCRIPT_NAME = Path(__file__).stem
+LOCK_FILE = Path(tempfile.gettempdir()) / f"{SCRIPT_NAME}.transcribe.py.lock"
+OUTPUT_FILE = Path(tempfile.gettempdir()) / f"{SCRIPT_NAME}.recording.wav"
 
 CHUNK = 1024
 FORMAT = pyaudio.paInt16

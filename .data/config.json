@@ -1,4 +1,33 @@
 {
-  "hotkeys": [],
+  "hotkeys": [
+    {
+      "hotkey": "f13",
+      "script_path": "D:/dev/shortcuts/.data/scripts/transcribe.py",
+      "name": "Transcribe",
+      "env_vars": {}
+    },
+    {
+      "hotkey": "print screen",
+      "script_path": "D:/dev/shortcuts/.data/scripts/screenshot.py",
+      "name": "Screenshot",
+      "env_vars": {}
+    },
+    {
+      "hotkey": "ctrl+f13",
+      "script_path": "D:/dev/shortcuts/.data/scripts/copy-transcribe-paste.py",
+      "name": "Copy, transcribe and replace",
+      "env_vars": {
+        "USE_GEMINI": "1"
+      }
+    },
+    {
+      "hotkey": "ctrl+shift+f13",
+      "script_path": "D:/dev/shortcuts/.data/scripts/copy-transcribe-paste.py",
+      "name": "Copy, transcribe and replace",
+      "env_vars": {
+        "USE_CLAUDE": "1"
+      }
+    }
+  ],
   "global_env_vars": {}
 }
